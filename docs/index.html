@@ -62,6 +62,40 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                    <p class="card-text">
+To set up my computer for Python development with the Artemis board:
+
+1. **Ensure Python 3.9+ and pip 21.0+** are installed. Check versions with `python3 --version` and `pip --version`.
+
+2. **Install Python and pip** using your system's package manager for Linux/FreeBSD users.
+
+3. **Create a virtual environment** named "FastRobots_ble" in your project directory using `python3 -m venv FastRobots_ble`.
+
+4. **Activate the virtual environment** with `.\FastRobots_ble\Scripts\activate` (Windows) or its Linux/macOS equivalent.
+
+5. **Install necessary Python packages** (`numpy`, `pyyaml`, `colorama`, `nest_asyncio`, `bleak`, `jupyterlab`) using pip within the virtual environment.
+
+6. **Set up the Lab 2 codebase** by downloading, unzipping, and ensuring the `ble_python` directory is in your project directory.
+
+7. **Start the Jupyter server** with `jupyter lab` to work on Python code in Jupyter notebooks.
+
+This streamlined process prepares your computer for developing Bluetooth communication projects with the Artemis board using Python.
+    </p>
+<h2>Artemis Board Setup Summary</h2>
+    <ol>
+        <li><strong>Obtain Artemis MAC Address:</strong> Get the BLE MAC address from the Artemis board documentation or by running a sketch.</li>
+        <li><strong>Update <code>connections.yaml</code>:</strong> Replace <code>artemis_address</code> with the obtained MAC address.</li>
+        <li><strong>Generate UUID:</strong> Use a Python script with <code>from uuid import uuid4; print(uuid4())</code> to generate a UUID.</li>
+        <li><strong>Update Files with UUID:</strong>
+            <ul>
+                <li>For <code>ble_arduino.ino</code>: Replace the BLEService UUID.</li>
+                <li>For <code>connections.yaml</code>: Update <code>ble_service</code> with the new UUID.</li>
+            </ul>
+        </li>
+        <li><strong>Save Changes:</strong> Ensure all files are saved with updates.</li>
+        <li><strong>Test BLE Connection:</strong> Re-test to confirm everything is set up correctly.</li>
+    </ol>
+    <p>Note: Adjust <code>base_ble.py</code> for platform-specific configurations if necessary.</p>
                 <h2 class="card-title">Task 1: ECHO</h2>
                 <p class="card-text">
 Issue an ECHO command to transmit a specific string from the computer to the Artemis board. For instance, when the computer dispatches the string "1" utilizing the ECHO functionality, it should anticipate receiving a modified version of the string, such as "Robot says -> 1 :)", retrieved through a GATT characteristic read operation.</p>
