@@ -62,28 +62,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                    <p class="card-text">
-To set up my computer for Python development with the Artemis board:
-
-1. **Ensure Python 3.9+ and pip 21.0+** are installed. Check versions with `python3 --version` and `pip --version`.
-
-2. **Install Python and pip** using your system's package manager for Linux/FreeBSD users.
-
-3. **Create a virtual environment** named "FastRobots_ble" in your project directory using `python3 -m venv FastRobots_ble`.
-
-4. **Activate the virtual environment** with `.\FastRobots_ble\Scripts\activate` (Windows) or its Linux/macOS equivalent.
-
-5. **Install necessary Python packages** (`numpy`, `pyyaml`, `colorama`, `nest_asyncio`, `bleak`, `jupyterlab`) using pip within the virtual environment.
-
-6. **Set up the Lab 2 codebase** by downloading, unzipping, and ensuring the `ble_python` directory is in your project directory.
-
-7. **Start the Jupyter server** with `jupyter lab` to work on Python code in Jupyter notebooks.
-
-This streamlined process prepares your computer for developing Bluetooth communication projects with the Artemis board using Python.
-    </p>
+                    <h2>Setting Up Computer for Python Development with the Artemis Board</h2>
+    <ol>
+        <li><strong>Ensure Python 3.9+ and pip 21.0+</strong> are installed. Check versions with <code>python3 --version</code> and <code>pip --version</code>.</li>
+        <li><strong>Install Python and pip</strong> using your system's package manager for Linux/FreeBSD users.</li>
+        <li><strong>Create a virtual environment</strong> named "FastRobots_ble" in my project directory using <code>python3 -m venv FastRobots_ble</code>.</li>
+        <li><strong>Activate the virtual environment</strong> with <code>.\FastRobots_ble\Scripts\activate</code> (Windows) or its Linux/macOS equivalent.</li>
+        <li><strong>Install necessary Python packages</strong> (<code>numpy</code>, <code>pyyaml</code>, <code>colorama</code>, <code>nest_asyncio</code>, <code>bleak</code>, <code>jupyterlab</code>) using pip within the virtual environment.</li>
+        <li><strong>Set up the Lab 2 codebase</strong> by downloading, unzipping, and ensuring the <code>ble_python</code> directory is in your project directory.</li>
+        <li><strong>Start the Jupyter server</strong> with <code>jupyter lab</code> to work on Python code in Jupyter notebooks.</li>
+    </ol>
+    <p>This streamlined process prepares your computer for developing Bluetooth communication projects with the Artemis board using Python.</p>
 <h2>Artemis Board Setup Summary</h2>
     <ol>
-        <li><strong>Obtain Artemis MAC Address:</strong> Get the BLE MAC address from the Artemis board documentation or by running a sketch.</li>
+        <li><strong>Obtain Artemis MAC Address:</strong> Get the BLE MAC address from the Artemis board.</li>
         <li><strong>Update <code>connections.yaml</code>:</strong> Replace <code>artemis_address</code> with the obtained MAC address.</li>
         <li><strong>Generate UUID:</strong> Use a Python script with <code>from uuid import uuid4; print(uuid4())</code> to generate a UUID.</li>
         <li><strong>Update Files with UUID:</strong>
