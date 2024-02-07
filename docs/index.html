@@ -73,6 +73,25 @@
         <li><strong>Start the Jupyter server</strong> with <code>jupyter lab</code> to work on Python code in Jupyter notebooks.</li>
     </ol>
     <p>This streamlined process prepares my computer for developing Bluetooth communication projects with the Artemis board using Python.</p>
+                <h2>Prelab 1 Blink test</h2>
+            <p> In the first lab I ran the blink example and got the following results</p>
+                <video src="images/lab1/blink.mp4" controls width="250">
+                <h2> Prelab 2 Serial test</h2>
+                    <p>The prelab 2 is to run an Artemis example sketch that operates serial communication between the board and PC.</p>
+<p>The MCU contains two UART peripherals to perform serial communication. In this sketch, the baud rate is set to be 115200. Upon running the program, the MCU counts from 0 to 9 then enters a loop where it listens and echoes messages received. The result is shown as follows.</p>
+                <img src="images/lab1/serial.png" controls width="250">
+                    <h2>Prelab 3 Analog read test</h2>
+            <p> The prelab 3 is to run another Artemis example analogRead to test the temperature sensor of the MCU.</p>
+<p>Upon running the example program, the MCU continuously reads data from the temperature sensor and prints the information to the serial monitor. The result shows as the demo video.</p>
+                <video src="images/lab1/analog.mp4" controls width="250">
+                    <h2>Prelab 4 Microphone test</h2>
+            <p> In this task, an example sketch is run to test the onboard pulse density microphone (PDM). The one with the largest magnitude among the sensed frequencies is printed to the serial monitor.</p>
+<p>In the demo video below, I tried to sing. The resultant data range was 100-400, indicating higher frequencies.</p>
+                <video src="images/lab1/Mic.mp4" controls width="250">
+                    <h2>Prelab Additiional for 5000-level</h2>
+            <p> An extra assignment involves creating a detector for the musical note "A."</p>
+                <video src="images/lab1/A.png" controls width="250">
+                <video src="images/lab1/A.mp4" controls width="250">
 <h2>Artemis Board Setup Summary</h2>
     <ol>
         <li><strong>Obtain Artemis MAC Address:</strong> Get the BLE MAC address from the Artemis board.</li>
