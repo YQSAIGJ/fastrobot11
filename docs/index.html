@@ -122,6 +122,7 @@ Issue an ECHO command to transmit a specific string from the computer to the Art
 The second task is to complete a command GET_TIME_MILLIS where the MCU sends the time in the format of "T:123456".</p>
 <p class="card-text">I added GET_TIME_MILLIS to the enumeration of both PC and Artemis program. I completed the command as:</p>
                 <img src="images/lab1/gettimecode.png" alt="ECHO command in jupyter">
+    <p class="card-text">The result shows as:</p>
                 <img src="images/lab1/gettime.png" alt="ECHO command in jupyter">
 
      <h2 class="card-title">Task 3： Handler</h2>
@@ -153,8 +154,34 @@ The second task is to complete a command GET_TIME_MILLIS where the MCU sends the
                 <img src="images/lab1/sendtempcode.png" alt="ECHO command in jupyter">
     <p class="card-text">The result shows as:</p>
                 <img src="images/lab1/sendtemp.png" alt="ECHO command in jupyter">
-               
-            </div>
+
+    <h2 class="card-title">Task 7： Limitations</h2>
+                <p class="card-text">
+The Artemis board is equipped with 384 kB of RAM, and assuming this entire memory capacity is available for storing sampled data, it's possible to calculate the storage capacity for 16-bit data samples. By converting the board's RAM size into bits (384 * 1000 * 8) and then dividing by 16 bits (the size of each data sample), we find that a total of 192,000 16-bit samples can be accommodated. If these samples are collected at a rate of 150 Hz, the board can record data continuously for 1280 seconds before its memory is full, as 192,000 samples divided by 150 samples per second equals 1280 seconds. Consequently, this means the board can handle 256 "5-second flows," where each flow consists of 16-bit values sampled at 150 Hz. "T:123456".</p>
+
+     <h2 class="card-title">5000-level 1 ： Data Rate</h2>
+                <p class="card-text">
+In order to generate messages of various lengths, I implemented a DATARATE command that prompts the MCU to dispatch a string of a specific length as determined by the PC. For instance, when the PC executes the command ble.send_command(CMD.DATARATE, 20), the MCU responds by sending back a string composed of 20 period characters ('.'), constituting a total of 20 bytes.
+</p>
+
+                <img src="images/lab1/dataratecode.png" alt="ECHO command in jupyter">
+    <p class="card-text">To track the data rate in real-time, I configured a notification handler on the PC that captures the current time recv_time each time a message is received. Following this, the PC commands the Artemis board to transmit a reply that includes an extra byte. The time of dispatch send_time is noted, and the data rate is determined by dividing the message length by the time interval (recv_time - send_time), with this process repeating for each message exchange.
+</p>
+                <img src="images/lab1/dataratepy.png" alt="ECHO command in jupyter">
+    <p class="card-text">The plot shows as:</p>
+               <img src="images/lab1/datarate.png" alt="ECHO command in jupyter">
+    <p class="card-text">
+The graph suggests that there is a general trend where the data rate rises with the increase in message payload size. Consequently, we can infer that larger message sizes contribute to minimizing overhead proportionally and enhance the actual data transfer rate. Conversely, transmitting data in several smaller packets incurs more overhead.</p>
+
+     <h2 class="card-title">5000-level 2 ： Reliability</h2>
+                <p class="card-text">
+To tally the quantity of messages dispatched and acknowledged by each party, I executed a command on the Artemis board that persistently sends messages, each tagged with a sequential index. Concurrently, the PC maintains a count of the messages it receives through a dedicated handler:</p>
+
+                <img src="images/lab1/reliabilitycode.png" alt="ECHO command in jupyter">
+                <img src="images/lab1/reliability.png" alt="ECHO command in jupyter">
+    <p class="card-text">With the MCU transmitting data incessantly, it achieves the maximal possible data rate. During the examination, the computer successfully captured every message emanating from Artemis, with no data loss occurring. From this observation, it's reasonable to deduce that the communication channel is dependable.</p>
+            
+</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
             </div>
