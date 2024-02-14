@@ -88,7 +88,7 @@
                 <h2 class="card-title"> Prelab 2 Serial test</h2>
                     <p>The prelab 2 is to run an Artemis example sketch that operates serial communication between the board and PC.</p>
 <p>The MCU contains two UART peripherals to perform serial communication. In this sketch, the baud rate is set to be 115200. Upon running the program, the MCU counts from 0 to 9 then enters a loop where it listens and echoes messages received. The result is shown as follows.</p>
-                <img src="images/lab1/serial.png" controls width="500"  >
+                <img src="images/lab1/serial.png" controls width="750"  >
                     <h2>Prelab 3 Analog read test</h2>
             <p> The prelab 3 is to run another Artemis example analogRead to test the temperature sensor of the MCU.</p>
 <p>Upon running the example program, the MCU continuously reads data from the temperature sensor and prints the information to the serial monitor. The result shows as the demo video.</p>
@@ -99,12 +99,12 @@
                 <video src="images/lab1/Mic.mp4"  controls width="300"> </video>
                     <h2>Prelab Additiional for 5000-level</h2>
             <p> An extra assignment involves creating a detector for the musical note "A."</p>
-                <img src="images/lab1/A.png" controls width="500" > </img>
+                <img src="images/lab1/A.png" controls width="750" > </img>
                 <video src="images/lab1/A.mp4" controls width="300" > </video>
 <h2>Artemis Board Setup Summary</h2>
     <ol>
         <li><strong>Obtain Artemis MAC Address:</strong> Get the BLE MAC address from the Artemis board.</li>
-        <img src="images/lab1/macaddress.png" controls width="500">
+        <img src="images/lab1/macaddress.png" controls width="750">
         <li><strong>Update <code>connections.yaml</code>:</strong> Replace <code>artemis_address</code> with the obtained MAC address.</li>
         <li><strong>Generate UUID:</strong> Use a Python script with <code>from uuid import uuid4; print(uuid4())</code> to generate a UUID.</li>
         <li><strong>Update Files with UUID:</strong>
@@ -120,47 +120,47 @@
                 <h2 class="card-title">Task 1: ECHO</h2>
                 <p class="card-text">
 Issue an ECHO command to transmit a specific string from the computer to the Artemis board. For instance, when the computer dispatches the string "1" utilizing the ECHO functionality, it should anticipate receiving a modified version of the string, such as "Robot says -> 1 :)", retrieved through a GATT characteristic read operation.</p>
-                <img src="images/lab1/ECHO.png" controls width="500">
+                <img src="images/lab1/ECHO.png" controls width="750">
                 <p class="card-text">
                     The picture below is the result returned on the Serial Monitor after Artemis accepts the ECHO command.</p>
-                 <img src="images/lab1/ECHO1.png" controls width="500">
+                 <img src="images/lab1/ECHO1.png" controls width="750">
      <h2 class="card-title">Task 2： GET_TIME</h2>
                 <p class="card-text">
 The second task is to complete a command GET_TIME_MILLIS where the MCU sends the time in the format of "T:123456".</p>
 <p class="card-text">I added GET_TIME_MILLIS to the enumeration of both PC and Artemis program. I completed the command as:</p>
-                <img src="images/lab1/gettimecode.png" controls width="500">
+                <img src="images/lab1/gettimecode.png" controls width="750">
     <p class="card-text">The result shows as:</p>
-                <img src="images/lab1/gettime.png" controls width="500">
+                <img src="images/lab1/gettime.png" controls width="750">
 
      <h2 class="card-title">Task 3： Handler</h2>
                 <p class="card-text">
 The second task is to complete a command GET_TIME_MILLIS where the MCU sends the time in the format of "T:123456".</p>
 <p class="card-text">I added GET_TIME_MILLIS to the enumeration of both PC and Artemis program. I completed the command as:</p>
-                <img src="images/lab1/handler.png" controls width="500">
+                <img src="images/lab1/handler.png" controls width="750">
 
     <h2 class="card-title">Task 4： Loop_send</h2>
                 <p class="card-text">
 The second task is to complete a command GET_TIME_MILLIS where the MCU sends the time in the format of "T:123456".</p>
 <p class="card-text">I added GET_TIME_MILLIS to the enumeration of both PC and Artemis program. I completed the command as:</p>
-                <img src="images/lab1/sendloopcode.png" controls width="500">
+                <img src="images/lab1/sendloopcode.png" controls width="750">
     <p class="card-text">The result shows as:</p>
-                <img src="images/lab1/sendloop.png" controls width="500">
+                <img src="images/lab1/sendloop.png" controls width="750">
 
     <h2 class="card-title">Task 5： Send Time Data</h2>
                 <p class="card-text">
 The second task is to complete a command GET_TIME_MILLIS where the MCU sends the time in the format of "T:123456".</p>
 <p class="card-text">I added GET_TIME_MILLIS to the enumeration of both PC and Artemis program. I completed the command as:</p>
-                <img src="images/lab1/sendtimecode.png" controls width="500">
+                <img src="images/lab1/sendtimecode.png" controls width="750">
     <p class="card-text">The result shows as:</p>
-                <img src="images/lab1/sendtime.png" controls width="500">
+                <img src="images/lab1/sendtime.png" controls width="750">
 
      <h2 class="card-title">Task 6： Send Temp Data</h2>
                 <p class="card-text">
 The second task is to complete a command GET_TIME_MILLIS where the MCU sends the time in the format of "T:123456".</p>
 <p class="card-text">I added GET_TIME_MILLIS to the enumeration of both PC and Artemis program. I completed the command as:</p>
-                <img src="images/lab1/sendtempcode.png" controls width="500">
+                <img src="images/lab1/sendtempcode.png" controls width="750">
     <p class="card-text">The result shows as:</p>
-                <img src="images/lab1/sendtemp.png" controls width="500">
+                <img src="images/lab1/sendtemp.png" controls width="750">
 
     <h2 class="card-title">Task 7： Limitations</h2>
                 <p class="card-text">
@@ -171,12 +171,12 @@ The Artemis board is equipped with 384 kB of RAM, and assuming this entire memor
 In order to generate messages of various lengths, I implemented a DATARATE command that prompts the MCU to dispatch a string of a specific length as determined by the PC. For instance, when the PC executes the command ble.send_command(CMD.DATARATE, 20), the MCU responds by sending back a string composed of 20 period characters ('.'), constituting a total of 20 bytes.
 </p>
 
-                <img src="images/lab1/dataratecode.png" controls width="500">
+                <img src="images/lab1/dataratecode.png" controls width="750">
     <p class="card-text">To track the data rate in real-time, I configured a notification handler on the PC that captures the current time recv_time each time a message is received. Following this, the PC commands the Artemis board to transmit a reply that includes an extra byte. The time of dispatch send_time is noted, and the data rate is determined by dividing the message length by the time interval (recv_time - send_time), with this process repeating for each message exchange.
 </p>
-                <img src="images/lab1/dataratepy.png" controls width="500">
+                <img src="images/lab1/dataratepy.png" controls width="750">
     <p class="card-text">The plot shows as:</p>
-               <img src="images/lab1/datarate.png" controls width="500">
+               <img src="images/lab1/datarate.png" controls width="750">
     <p class="card-text">
 The graph suggests that there is a general trend where the data rate rises with the increase in message payload size. Consequently, we can infer that larger message sizes contribute to minimizing overhead proportionally and enhance the actual data transfer rate. Conversely, transmitting data in several smaller packets incurs more overhead.</p>
 
@@ -184,8 +184,8 @@ The graph suggests that there is a general trend where the data rate rises with 
                 <p class="card-text">
 To tally the quantity of messages dispatched and acknowledged by each party, I executed a command on the Artemis board that persistently sends messages, each tagged with a sequential index. Concurrently, the PC maintains a count of the messages it receives through a dedicated handler:</p>
 
-                <img src="images/lab1/reliabilitycode.png" controls width="500">
-                <img src="images/lab1/reliability.png" controls width="500">
+                <img src="images/lab1/reliabilitycode.png" controls width="750">
+                <img src="images/lab1/reliability.png" controls width="750">
     <p class="card-text">With the MCU transmitting data incessantly, it achieves the maximal possible data rate. During the examination, the computer successfully captured every message emanating from Artemis, with no data loss occurring. From this observation, it's reasonable to deduce that the communication channel is dependable.</p>
             
 </div>
@@ -234,9 +234,9 @@ To tally the quantity of messages dispatched and acknowledged by each party, I e
 The IMU is interfaced with the Artemis microcontroller via the Qwiic breakout board. Once the IMU example code is uploaded to the Artemis, it retrieves and prints the readings from the accelerometer, gyroscope, and magnetometer sensors.</p>
                 <video src="images/lab2/IMU.mp4"  controls width="300"> </video>
     <p class="card-text">In the example code, a constant AD0_VAL is defined for .begin(WIRE_PORT, AD0_VAL);. It should be set to 1, which is the default value for the SparkFun 9DoF IMU breakout, but should be 0 if the ADR jumper is closed.</p>
-                <img src="images/lab2/chuizhi.png" controls width="500">
+                <img src="images/lab2/chuizhi.png" controls width="750">
     <p class="card-text">I added codes to blink the LED on Artemis when IMU is connected and started as a visual indication:</p>
-    <img src="images/lab2/blink.png" controls width="500">\
+    <img src="images/lab2/blink.png" controls width="750">\
 
 
 
@@ -244,10 +244,10 @@ The IMU is interfaced with the Artemis microcontroller via the Qwiic breakout bo
     <h2 class="card-title">(a) Pitch and Roll</h2>
                 <p class="card-text">
 Accelerometer readings can be turned into pitch and roll through mathematical calculations. Pitch is given by pitch_a = atan2(myICM.accX(),myICM.accZ())*180/M_PI, and roll is given by roll_a = atan2(myICM.accY(),myICM.accZ())*180/M_PI.</p>
-<img src="images/lab2/pitchcode.png" controls width="500">
+<img src="images/lab2/pitchcode.png" controls width="750">
     <p class="card-text">
 Example outputs for {-90, 0, 90} degrees pitch and roll are:</p>
-                <img src="images/lab2/pitch.png" controls width="500">
+                <img src="images/lab2/pitch.png" controls width="750">
   <h2 class="card-title">(b) Accuracy Discussion</h2>
     <p class="card-text">
 While noise significantly impacts the precision of accelerometer readings, resulting in an error of around ±2 degrees, the accuracy remains relatively high, with readings typically centered around the true values. Consequently, I believe that a two-point calibration is unnecessary in this scenario.</p>
@@ -255,12 +255,12 @@ While noise significantly impacts the precision of accelerometer readings, resul
 <h2 class="card-title">(c) Frequency Spectrum Analysis</h2>
     <p class="card-text">
 FFT is used to analyze noise in accelerometer readings. I sampled roll data with a sample rate of 64 for 5 seconds and got 320 points to perform FFT. During the sampling period, I slowly turned IMU around its x-axis.</p>
-     <img src="images/lab2/fftcode.png" controls width="500">
-     <img src="images/lab2/fft.png" controls width="500">
+     <img src="images/lab2/fftcode.png" controls width="750">
+     <img src="images/lab2/fft.png" controls width="750">
     <p class="card-text">
         With the sampled data from Artemis, a python script was run to generate FFT result:</p>
-    <img src="images/lab2/fftcode1.png" controls width="500">
-    <img src="images/lab2/f.png" controls width="500">
+    <img src="images/lab2/fftcode1.png" controls width="750">
+    <img src="images/lab2/f.png" controls width="750">
   <p class="card-text">  
 The frequency domain plot reveals that the primary component, representing the pertinent data, is situated in the low-frequency region near 0 Hz. Notably, there are no significant spikes evident in the frequency domain plot, likely due to the default selection of a low-pass filter for the accelerometer in the IMU chip. However, if I were to opt for another cut-off frequency to further attenuate residual noise, I would select 5 Hz. This choice would retain essential low-frequency data while effectively filtering out the majority of the noise.</p>
 
@@ -270,29 +270,29 @@ The frequency domain plot reveals that the primary component, representing the p
     <h2 class="card-title">(a) Pitch, Roll, and Yaw</h2>
 <p class="card-text">
     Gyroscope data are collected to calculate pitch, roll and yaw:</p>
-<img src="images/lab2/gycode.png" controls width="500">
+<img src="images/lab2/gycode.png" controls width="750">
     <p class="card-text">
    Below are some example outputs at different gestures:</p>
-    <img src="images/lab2/gy1.png" controls width="500">
-    <img src="images/lab2/gy2.png" controls width="500">
+    <img src="images/lab2/gy1.png" controls width="750">
+    <img src="images/lab2/gy2.png" controls width="750">
 
     <h2 class="card-title">(b) Complementary Filter</h2>
     <p class="card-text">
 The accelerometer, being sensitive to noise but resistant to drifting, complements the gyroscope, which produces smooth but drifting results. By combining the two sensors with a complementary filter, their respective drawbacks can be mitigated. The filter equation is represented as: theta = (theta + gyr_data * dt) * (1 - alpha) + acc_data * alpha.</p>
-    <img src="images/lab2/gycode1.png" controls width="500">
+    <img src="images/lab2/gycode1.png" controls width="750">
     <p class="card-text">
         After several tests, I chose alpha to be 0.3 to maximize performance. Here's the video demonstrating results from accelerometer only, gyroscope only, and combined, which is close to the accurate accelerometer result but without noise:</p>
-    <img src="images/lab2/gyb.png" controls width="500">
+    <img src="images/lab2/gyb.png" controls width="750">
 
 
     <h2 class="card-title">Task 4: Sample Data</h2>
     <p class="card-text">
 To transmit IMU data to a PC, I introduced a new command called GET_SAMPLE_IMU. This command collects IMU data into arrays, then transmits the data to the PC via Bluetooth. The data is formatted as follows: time|accx,accy,accz|gyrx,gyry,gyrz.</p>
-    <img src="images/lab2/samplecode.png" controls width="500">
+    <img src="images/lab2/samplecode.png" controls width="750">
 <p class="card-text">
     Received data are processed by a notification handler in Python and then plotted:</p>
-    <img src="images/lab2/samplepy.png" controls width="500">
-    <img src="images/lab2/sample.png" controls width="500">
+    <img src="images/lab2/samplepy.png" controls width="750">
+    <img src="images/lab2/sample.png" controls width="750">
 
     <p class="card-text">
 Considering that an integer occupies 2 bytes and a float occupies 4 bytes, each sample will require 3 integers (6 bytes) and 6 floats (24 bytes), totaling 30 bytes. With a sampling rate of 10 samples per second, each second will generate 300 bytes of data. With 384 kB of RAM available on the Artemis, it can support approximately 1310 seconds of continuous sampling when the entire memory is allocated to the arrays.</p>
