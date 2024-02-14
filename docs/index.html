@@ -212,7 +212,7 @@ To tally the quantity of messages dispatched and acknowledged by each party, I e
                     <div class="card h-100">
                         <div class="card-body">
                             <h2 class="card-title">Lab Two</h2>
-                            <p class="card-text">Lab two is about IMU model and the filters applied for the data</p>
+                            <p class="card-text">Lab two is about IMU model and the filters applied for the data.</p>
                         </div>
                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#labTwoModal">
         More Info
@@ -228,9 +228,39 @@ To tally the quantity of messages dispatched and acknowledged by each party, I e
 <div class="modal-body" style="overflow-y: auto; max-height: 80vh;">
 
 
-                    <h2>Setting Up Computer for Python Development with the Artemis Board</h2>
+                    
+ <h2 class="card-title">Task 1: IMU Setup</h2>
+                <p class="card-text">
+The IMU is interfaced with the Artemis microcontroller via the Qwiic breakout board. Once the IMU example code is uploaded to the Artemis, it retrieves and prints the readings from the accelerometer, gyroscope, and magnetometer sensors.</p>
+                <video src="images/lab2/IMU.mp4"  controls width="300"> </video>
+    <p class="card-text">In the example code, a constant AD0_VAL is defined for .begin(WIRE_PORT, AD0_VAL);. It should be set to 1, which is the default value for the SparkFun 9DoF IMU breakout, but should be 0 if the ADR jumper is closed.</p>
+                <img src="images/lab2/chuizhi.png" alt="ECHO command in jupyter">
+    <p class="card-text">I added codes to blink the LED on Artemis when IMU is connected and started as a visual indication:</p>
+    <img src="images/lab2/blink.png" alt="ECHO command in jupyter">\
 
 
+
+    <h2 class="card-title">Task 2: Accelerometer</h2>
+    <h2 class="card-title">(a) Pitch and Roll</h2>
+                <p class="card-text">
+Accelerometer readings can be turned into pitch and roll through mathematical calculations. Pitch is given by pitch_a = atan2(myICM.accX(),myICM.accZ())*180/M_PI, and roll is given by roll_a = atan2(myICM.accY(),myICM.accZ())*180/M_PI.</p>
+<img src="images/lab2/pitchcode.png" alt="ECHO command in jupyter">
+    <p class="card-text">
+Example outputs for {-90, 0, 90} degrees pitch and roll are:</p>
+                <img src="images/lab2/pitch.png" alt="ECHO command in jupyter">
+  <h2 class="card-title">(b) Accuracy Discussion</h2>
+    <p class="card-text">
+While noise significantly impacts the precision of accelerometer readings, resulting in an error of around ±2 degrees, the accuracy remains relatively high, with readings typically centered around the true values. Consequently, I believe that a two-point calibration is unnecessary in this scenario.</p>
+
+<h2 class="card-title">(c) Frequency Spectrum Analysis</h2>
+    <p class="card-text">
+FFT is used to analyze noise in accelerometer readings. I sampled roll data with a sample rate of 64 for 5 seconds and got 320 points to perform FFT. During the sampling period, I slowly turned IMU around its x-axis.</p>
+     <img src="images/lab2/fftcode.png" alt="ECHO command in jupyter">
+     <img src="images/lab2/fft.png" alt="ECHO command in jupyter">
+    <p class="card-text">
+        With the sampled data from Artemis, a python script was run to generate FFT result:</p>
+    <img src="images/lab2/fftcode1.png" alt="ECHO command in jupyter">
+    <img src="images/lab2/f.png" alt="ECHO command in jupyter">
 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
