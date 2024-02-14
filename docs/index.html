@@ -261,6 +261,48 @@ FFT is used to analyze noise in accelerometer readings. I sampled roll data with
         With the sampled data from Artemis, a python script was run to generate FFT result:</p>
     <img src="images/lab2/fftcode1.png" alt="ECHO command in jupyter">
     <img src="images/lab2/f.png" alt="ECHO command in jupyter">
+  <p class="card-text">  
+The frequency domain plot reveals that the primary component, representing the pertinent data, is situated in the low-frequency region near 0 Hz. Notably, there are no significant spikes evident in the frequency domain plot, likely due to the default selection of a low-pass filter for the accelerometer in the IMU chip. However, if I were to opt for another cut-off frequency to further attenuate residual noise, I would select 5 Hz. This choice would retain essential low-frequency data while effectively filtering out the majority of the noise.</p>
+
+
+
+    <h2 class="card-title">Task 3: Gyroscope</h2>
+    <h2 class="card-title">(a) Pitch, Roll, and Yaw</h2>
+<p class="card-text">
+    Gyroscope data are collected to calculate pitch, roll and yaw:</p>
+<img src="images/lab2/gycode.png" alt="ECHO command in jupyter">
+    <p class="card-text">
+   Below are some example outputs at different gestures:</p>
+    <img src="images/lab2/gy1.png" alt="ECHO command in jupyter">
+    <img src="images/lab2/gy2.png" alt="ECHO command in jupyter">
+
+    <h2 class="card-title">(b) Complementary Filter</h2>
+    <p class="card-text">
+The accelerometer, being sensitive to noise but resistant to drifting, complements the gyroscope, which produces smooth but drifting results. By combining the two sensors with a complementary filter, their respective drawbacks can be mitigated. The filter equation is represented as: theta = (theta + gyr_data * dt) * (1 - alpha) + acc_data * alpha.</p>
+    <img src="images/lab2/gycode1.png" alt="ECHO command in jupyter">
+    <p class="card-text">
+        After several tests, I chose alpha to be 0.3 to maximize performance. Here's the video demonstrating results from accelerometer only, gyroscope only, and combined, which is close to the accurate accelerometer result but without noise:</p>
+    <img src="images/lab2/gyb.png" alt="ECHO command in jupyter">
+
+
+    <h2 class="card-title">Task 4: Sample Data</h2>
+    <p class="card-text">
+To transmit IMU data to a PC, I introduced a new command called GET_SAMPLE_IMU. This command collects IMU data into arrays, then transmits the data to the PC via Bluetooth. The data is formatted as follows: time|accx,accy,accz|gyrx,gyry,gyrz.</p>
+    <img src="images/lab2/samplecode.png" alt="ECHO command in jupyter">
+<p class="card-text">
+    Received data are processed by a notification handler in Python and then plotted:</p>
+    <img src="images/lab2/samplepy.png" alt="ECHO command in jupyter">
+    <img src="images/lab2/sample.png" alt="ECHO command in jupyter">
+
+    <p class="card-text">
+Considering that an integer occupies 2 bytes and a float occupies 4 bytes, each sample will require 3 integers (6 bytes) and 6 floats (24 bytes), totaling 30 bytes. With a sampling rate of 10 samples per second, each second will generate 300 bytes of data. With 384 kB of RAM available on the Artemis, it can support approximately 1310 seconds of continuous sampling when the entire memory is allocated to the arrays.</p>
+
+
+    <h2 class="card-title">Task 5: Record a Stunt</h2>
+<p class="card-text">
+    With the remote control, I managed to make the RC car perform stunts like flipping and spinning in place. To do a flip, the motors should first dash in one direction then motors abruptly inverse direction.</p>
+<video src="images/lab2/Robot.mp4"  controls width="300"> </video>
+
 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
