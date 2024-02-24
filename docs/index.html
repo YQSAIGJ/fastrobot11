@@ -356,10 +356,62 @@ Each sensor is able to detect obstacles on its corresponding side. If they detec
   <h2>(d) Wiring</h2>
     <img src="images/lab3/wire.png" controls width="750">
     <p class="card-text">
-    Qwiic cables are arranged in colors: black for GND, red for 3.3V, blue for SDA and yellow for SCL.</p>
-    
-    
+    Qwiic cables are arranged inConsidering the robot's operational needs in diverse environments, robustness to ambient light is essential. Additionally, for a compact vehicle, a range of 1.3 meters is sufficient. Therefore, Short mode appears to be the most suitable for this application.
+<h2>Lab Tasks & Results</h2>
+    <h2>Task 1: Connection</h2>
+     <p class="card-text">
+The two ToF sensors are connected to a QWIIC break-out board then to the Artemis board.</p>
+    <img src="images/lab3/connect.png" controls width="750">
+     <p class="card-text">
+    Upon establishing a physical connection and conducting an I2C scan, the Artemis detected a device at address 0x29. This address differs from the expected 0x52 listed in the VL53L1X datasheet. The discrepancy is due to the I2C protocol transmitting the most significant bit (MSB) first. The binary representation of 0x29 is '101001', and for 0x52 it is '1010010'. The first seven bits are identical for both values. I2C addresses are 7 bits long, so during transmission, these seven bits are sent, followed by a zero bit to complete the byte, translating 0x29 into 0x52 in an 8-bit context.</p>
+     <img src="images/lab3/052.png" controls width="750">
+    <h2>Task 2: Sensor Data of Chosen Mode</h2>
+    <p class="card-text">
+The ToF sensor operates in three distinct modes. Long mode, the default setting, allows for measurements up to 4 meters, offering the greatest range but with heightened sensitivity to variations in ambient light. Short mode limits the detection distance to 1.3 meters, yet it provides the strongest resilience to ambient light fluctuations. Medium mode presents a balance, detecting obstacles up to 3 meters while offering moderate ambient light sensitivity.</p>
+    <p class="card-text">
+        Considering the robot's operational needs in diverse environments, robustness to ambient light is essential. Additionally, for a compact vehicle, a range of 1.3 meters is sufficient. Therefore, Short mode appears to be the most suitable for this application.</p>
+        <img src="images/lab3/sensor.png" controls width="750">
+    <h2>Task 3: Two sensor working in parallel</h2>
+    <p class="card-text">
+During the preliminary lab session, I altered the I2C address of one sensor to 0x33 to enable simultaneous distance measurements from both sensors. The code used to modify the address is provided below:</p>
+    <img src="images/lab3/code3.png" controls width="750">
+    <p class="card-text">
+    The result of running the measure distance with two sensor shown in the image below:</p>
+    <img src="images/lab3/3.png" controls width="750">
+    <h2>Task 4: ToF Sensor Speed</h2>
+    <p class="card-text">
+    In order to enhance the readout velocity, I eliminated the stopRanging() and clearInterrupt() instructions and relocated the startRanging() method to the setup section of the code. Now, sensor readings are outputted exclusively when new data is available, which is when .checkForDataReady() evaluates to True.</p>
+    <img src="images/lab3/code4.png" controls width="750">
+    <img src="images/lab3/4.png" controls width="750">
+    <p class="card-text">
+    Despite the presence of redundant code segments (e.g., time retrieval and serial printing), the loop consistently executes within the range of 10 to 11 milliseconds. This marks a significant reduction from the original ranging time of 50 milliseconds. Within this 10-11 millisecond window, the predominant portion of time is still consumed by the ToF (Time-of-Flight) reading operations, accounting for approximately 8 milliseconds. As a result, it is evident that the primary bottleneck in reducing processing time lies in the I2C communication conducted between the sensors and the Artemis microcontroller.</p>
+    <h2>Task 5: Time v Distance</h2>
+    <p class="card-text">
+    A GET_ToF_10s command is written to send ToF data sampled in 5 s to PC through BLE:</p>
+    <img src="images/lab3/code5.png" controls width="750">
+    <p class="card-text">
+The PC utilizes a notification handler to interpret the received message. Subsequently, the data samples from the two sensors are graphed against their respective time stamps.</p>
+    <img src="images/lab3/python5.png" controls width="750">
+    <img src="images/lab3/5.png" controls width="750">
 
+    <h2>Task 6: (5160) Discussion on infrared transmission based sensors</h2>
+    <p>The sensor utilized in this laboratory relies on time-of-flight (ToF) infrared transmission. ToF infrared sensors function by emitting a pulse-modulated signal, measuring the time taken (t) for the signal to travel to the target and return, and then calculating the distance (d) using the formula d = t * c / 2, where c represents the speed of light.ToF IR sensors offer several advantages, including a high sample rate, compact form factor, and immunity to variations in colors, textures, and ambient lighting conditions. However, they also have drawbacks such as high cost and complex processing requirements.</p>
+<br>
+<p>Certain infrared distance sensors utilize amplitude-based measurement methods, where the amplitude of the reflected wave is compared to that of the original emitted wave to calculate distance. These sensors offer advantages such as low cost and straightforward circuitry, and they generally perform adequately across various conditions. However, they exhibit high sensitivity to target reflectivity and may experience diminished performance in environments with high ambient light levels.</p>
+    <br>
+    <p>Triangulation-based sensors emit a wave at an angle towards the target and measure the reflected wave using an array of diodes. Distance calculation involves analyzing the angle of incidence and the distance between the diode with the highest signal magnitude. These sensors offer advantages such as simple circuitry and reduced sensitivity to factors like color, texture, and ambient light. However, they tend to be expensive and bulky, and may not function well in environments with high ambient light levels. Additionally, they often suffer from a low sample rate.</p>
+
+    <h2>Task 7: (5160) Sensitivity of sensors to colors and textures</h2>
+    <p class="card-text">
+    In this part, I used cardboard of different colors to stick on the wall for testing to explore the impact of color on the sensor. I tested black, white and yellow respectively, and the relevant results are shown below.</p>
+ <br>
+    <img src="images/lab3/71.png" controls width="750">
+     <br>
+    <img src="images/lab3/72.png" controls width="750">
+     <br>
+    <img src="images/lab3/73.png" controls width="750">
+<p class="card-text">
+    It turned out that there was no notable difference among these materials in terms of reading accuracy and speed. Therefore, the conclusion that the ToF IR sensor is not sensitive to colors and textures is implied.</p>
 
 </div>
             <div class="modal-footer">
