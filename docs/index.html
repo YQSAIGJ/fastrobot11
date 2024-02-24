@@ -314,6 +314,71 @@ Considering that an integer occupies 2 bytes and a float occupies 4 bytes, each 
 
 
 
+
+
+
+
+
+
+
+                <!-- Content Row-->
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Lab Three</h2>
+                            <p class="card-text">Lab two is about arming the Artemis board with two time-of-flight distance sensors. The range, accuracy, repeatability, and reading time of the sensors are tested.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#labThreeModal">
+        More Info
+    </button>
+                    </div>
+                <div class="modal fade" id="labThreeModal" tabindex="-1" aria-labelledby="labThreeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="labThreeModalLabel">Lab Three Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+<div class="modal-body" style="overflow-y: auto; max-height: 80vh;">
+
+
+                    <h2>Prelab</h2>
+                    <h2>(a)I2C</h2>
+    <p class="card-text">
+        The sensors use I2C to communicate with the Artemis board. As is specified on VL53L1X's datasheet, the default I2C address is 0x52.</p>
+    <h2>(b)2 Sensors</h2>
+     <p class="card-text">
+         When using multiple sensors with the same default I2C address on a single I2C bus, you need to change the address of at least one of the sensors to avoid conflicts. Here's a description of how you can achieve this using a microcontroller like the SparkFun Artemis, which has programmable GPIO pins:Initially, both Time-of-Flight (ToF) sensors are connected to the Artemis, sharing the same I2C address. To differentiate them, the XSHUT (shutdown) pin of one sensor is connected to a GPIO pin on the Artemis.</p>
+    <h2>(c) Placement on Robot</h2>
+<p class="card-text">
+Each sensor is able to detect obstacles on its corresponding side. If they detect an obstacle of the same distance simultaneously, it is probable that there is an obstacle in the front. However, this requires both of the sensors function correctly with high precision. Also, small obstacles in the front could be missed if it is closer to one sensor. More accurate measurement could be achieved by adding more sensors.</p>
+  <h2>(d) Wiring</h2>
+    <img src="images/lab3/wire.png" controls width="750">
+    <p class="card-text">
+    Qwiic cables are arranged in colors: black for GND, red for 3.3V, blue for SDA and yellow for SCL.</p>
+    
+    
+
+
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+
+
+
+
+
+
+
+
+
+                
                 
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
