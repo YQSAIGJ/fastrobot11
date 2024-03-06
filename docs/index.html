@@ -430,6 +430,128 @@ The PC utilizes a notification handler to interpret the received message. Subseq
 
 
 
+                <!-- Content Row-->
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Lab Four</h2>
+                            <p class="card-text">In this laboratory session, two motor drivers are initially examined for functionality before being employed to operate the vehicle's motors. Finally, an open-loop control is executed without any physical connection to the system, allowing for autonomous operation.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#labFourModal">
+        More Info
+    </button>
+                    </div>
+                <div class="modal fade" id="labFourModal" tabindex="-1" aria-labelledby="labFourModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="labFourModalLabel">Lab Four Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+<div class="modal-body" style="overflow-y: auto; max-height: 80vh;">
+
+
+                    <h2>Prelab</h2>
+    <p class="card-text">
+        The intended connections between the motor drivers, Artemis, and battery are shown as:</p>
+    <img src="images/lab4/diagram.png" controls width="750">
+      <p class="card-text">
+          I chose 11, 12, 6 and 7 on Artemis as the motor drivers' input because these pins support PWM, which are implied in the schematic plot by a ~ sign.</p>
+    <img src="images/lab4/artemis.png" controls width="750">
+    <p class="card-text">
+Separate batteries are used to energize the Artemis and the motor drivers, enabling independent troubleshooting and preventing electrical noise from the motors from affecting the Artemis. Moreover, since the motors consume energy at a much higher rate compared to the Artemis, they require an independent power source to ensure the microcontroller unit (MCU) operates efficiently without rapid power depletion.</p>
+    <h2>Lab Tasks</h2>
+     <h2>Task 1: PWM Signals Generation</h2>
+     <p class="card-text">
+    To visualize the PWM signal, the probe tip of the oscilloscope is connected to the output of a motor driver, while the ground clip is secured to the motor driver's ground terminal.</p>
+   <p class="card-text">
+    As for power supply of the driver, I simply attach the 3.7 V power supply to it, which is within the operating voltage range of 2.7 V to 10.8 V stated in the motor driver's datasheet.</p>
+<p class="card-text">
+I first tested the driver with analogWrite(11,63); analogWrite(12,0);, which generates a 25% duty cycle PWM signal as 63 is approximately 25% of 255. The corresponding oscilloscope display is:</p>
+    <img src="images/lab4/25.png" controls width="750">
+    <p class="card-text">
+    Then I tested on analogWrite(11,127); analogWrite(12,0);, which generates a 50% duty cycle PWM signal as 127 is approximately half of 255. The corresponding oscilloscope display is:</p>
+    <img src="images/lab4/50.png" controls width="750">
+
+    <h2>Task 2: Wheels Spinning</h2>
+ <p class="card-text">
+    By running the following codes, I managed to spin the right-side wheels forward.</p>
+    <img src="images/lab4/right.png" controls width="750">
+    <video src="images/lab4/2.mp4" controls width="300" > </video>
+ <p class="card-text">
+    With battery attached to the motor drivers, I put the car on the Large electrical tape and let wheels on both sides spin：</p>
+    <video src="images/lab4/4.mp4" controls width="300" > </video>
+
+    <h2>Task 3: Secure Components</h2>
+    <p class="card-text">
+        All the components are secured as follows:</p>
+    <img src="images/lab4/car.png" controls width="750">
+
+    <h2>Task 4: Lower Limit PWM Value</h2>
+    <p class="card-text">
+The minimum PWM values required to propel the car forward on the laboratory floor and to execute turns are determined by programming various speed values into the Artemis and observing which values are effective in achieving movement.</p>
+    <p class="card-text">
+To make the car run, the lower limit PWM value I obtained is 60:</p>
+    <video src="images/lab4/low.mp4" controls width="300" > </video>
+    <p class="card-text">
+The lower limit to do in-place turns I obtained is 110:</p>
+    <video src="images/lab4/spin.mp4" controls width="300" > </video>
+<p class="card-text">
+    But these results are susceptible to change in lab settings, e.g. different textures of the floor and smoothness of the tires, etc..</p>
+
+
+<h2>Task 5: Go a Straight Line</h2>
+    <p class="card-text">
+    Initially, the car tended to drift towards its left side, so I added a calibration factor 1.2 which gave the left wheels more power so that the car can follow a fairly straight line. However, such static calibration method is susceptible to environment changes, so it is necessary to use PID control in future labs.</p>
+    <img src="images/lab4/code.png" controls width="750">
+    <p class="card-text">
+    By applying the calibration stated above, the car can go a fairly straight line in the video</p>
+    <video src="images/lab4/zhi.mp4" controls width="300" > </video>
+
+<h2>Task 6: Open Loop Control</h2>
+    <p class="card-text">
+        I write up all the actions in functions to make the code more readable:</p>
+    <img src="images/lab4/func.png" controls width="750">
+   <p class="card-text">
+    For the untethered open loop control, the car is programmed to move forth and back and make a clockwise turn repeatedly with the following codes:</p>
+    <img src="images/lab4/do.png" controls width="750">
+    <video src="images/lab4/last.mp4" controls width="300" > </video>
+<h2>Additional 5160 level Task 1: AnalogWrite Frequency Discussion</h2>
+    <p class="card-text">
+    The Artemis board, by default, generates a PWM signal at 500 Hz. To produce a PWM signal with a significantly higher or lower frequency, it's necessary to alter the counter/timer configuration and utilize the repeated pulse mode. For instance, to create a PWM signal at approximately 3kHz with a 75% duty cycle, one would start by setting up the clock to output at the target frequency. To achieve the 75% duty cycle, the CMPR0 register is set to 75% of the maximum count value, causing the output to toggle each time the counter hits this value. Once the counter reaches its maximum and resets, the cycle starts anew.</p>
+    <p class="card-text">
+        The motor driver's datasheet indicates an acceptable input PWM frequency range from 0 Hz to 200 kHz, with a stipulation that input pulses should maintain a minimum width of 800 ns for reliable detection. With a base frequency of 500 Hz, there is a theoretical duty cycle range from nearly 0% to just under 100%. At higher PWM frequencies, the effective duty cycle range diminishes because of the shorter period of the PWM signal. Nonetheless, demonstrations in the provided videos show that the 500 Hz frequency is adequate, negating the necessity to increase the frequency for this application.</p>
+<h2>Additional 5160 level Task 2: Lower Limit PWM Value in Motion</h2>
+    <p class="card-text">
+    As static friction is greater than kinetic friction, it takes higher voltage to start the car from still than to keep it moving while in motion. To explore the lower limit PWM value in motion, I set the initial speed as 60 to start the car, then deduct 2 from the value every 3 seconds to see which value stops the car.</p>
+<video src="images/lab4/stop.mp4" controls width="300" > </video>
+    <p class="card-text">
+    As demonstrated in the video, the car stopped after 9 seconds from the time it started to move, which corresponded to PWM value of 54. So the lowest limit is 54 to keep the car running in motion, which is lower than the limit to start (60).</p>
+
+    
+        
+    
+    
+    
+        
+    
+    
+    
+
+
+
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+
+
+
                 
                 
     
