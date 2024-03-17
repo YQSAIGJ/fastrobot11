@@ -554,7 +554,7 @@ The lower limit to do in-place turns I obtained is 110:</p>
                             <h2 class="card-title">Lab Five</h2>
                             <p class="card-text">Lab Five is about Linear PID control and Linear interpolation</p>
                         </div>
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#labTwoModal">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#labFiveModal">
         More Info
     </button>
                     </div>
@@ -568,7 +568,51 @@ The lower limit to do in-place turns I obtained is 110:</p>
 <div class="modal-body" style="overflow-y: auto; max-height: 80vh;">
 
 
-                    <h2>Setting Up Computer for Python Development with the Artemis Board</h2>
+                    <h2>Prelab</h2>
+    <p class="card-text">    
+While observing our car's behavior is crucial for PID tuning, accessing key data from sensors and Artemis is essential. Hence, I developed a new string processing function, along with data storage and plotting capabilities.</p>
+    <img src="images/lab5/pycode.png" controls width="750">
+    <img src="images/lab5/pycode2.png" controls width="750">
+    <p class="card-text">    
+On Artemis, data comprising time, distance, and PWM is packaged and sent. By eliminating symbols and using "|" for separation, I've minimized the data transmission time, allowing for a shorter control period. This adjustment is crucial because we're working with a single core for both PID control and data transmission. The implementation of this strategy, alongside PID control, will be detailed in the subsequent section.</p>
+    <img src="images/lab5/data.png" controls width="750">
+
+    <h>P/I/D Discussion </h>
+<p class="card-text"> 
+    PID stands for Proportional-Integral-Derivative control, with the formula for correction being correction = Kperror + Kiintegral of error + Kd*derivative of error.</p>
+    <p class="card-text">
+        The proportional gain, Kp, addresses the current error (the discrepancy between the desired and actual values) proportionately. Increasing Kp intensifies the control response, though it may lead to overshoot or instability.</p>
+    <p class="card-text">
+        The integral gain, Ki, compensates for accumulated errors over time. It enhances control action for prolonged errors, but overly high values can introduce overshoot or oscillation due to the delay in counteracting accumulated errors.</p>
+    <p class="card-text">
+        The derivative gain, Kd, anticipates future errors by considering the error's rate of change. It serves as a dampener to minimize overshoot and slow down the response speed, but it may exacerbate noise in the system.</p>
+
+
+    <h>Range/Sampling Time Discussion</h>
+    <p class="card-text">
+Initially, my PID loop included a delay to wait for the distance sensor data to be ready, using while (!distanceSensor1.checkForDataReady()) delay(1). This setup resulted in each cycle averaging 90-100 ms. To accelerate the loop times, I removed the code that waited for sensor readiness. Consequently, the revised PID loop now operates at 8-9 ms per cycle, with the majority of this time, approximately 7 ms, being attributed to reading from the Time-of-Flight (TOF) sensor.</p>
+    <h>PID Implementation</h>
+    <p class="card-text">
+    The PID control was implemented using the code provided. It's important to highlight that the car requires a minimum PWM value to overcome friction  Therefore, any PWM value below these thresholds is practically ineffective. To address this, I incorporate these threshold values directly when configuring the GPIO. Additionally, I've imposed a limit of 30 on the PWM for the left side to simplify control of the car.</p>
+      <p class="card-text">
+The code is as below, together with BLE data-sending functions. I finally tuned my proportional parameter to 0.7 and my integral parameter to 0.02.</p>
+    <img src="images/lab5/code.png" controls width="750">
+<h>Result</h>
+<p class="card-text">
+    In the short-distance startup test, the car's response was as follows, and I have plotted the data accordingly. I believe the car performed well.</p>
+    <video src="images/lab5/stop.mp4" controls width="300" > </video>
+    <img src="images/lab5/plot.png" controls width="750">
+    <h>Wind-up protection for integrator (5000+ level)</h>
+    <p class="card-text">
+Windup, a challenge with the integral term, leads to overshoot by allowing the integral component's accumulation to exceed the control signal's saturation limits. To combat this, I utilize two strategies: implementing bounds and adopting the Clegg Integrator. The Clegg Integrator resets the accumulated integral value whenever the error changes sign, effectively clearing any built-up error that could contribute to windup in the opposite direction.</p>
+    
+
+
+
+
+
+
+    
 
 
 </div>
