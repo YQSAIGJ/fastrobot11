@@ -643,7 +643,37 @@ Windup, a challenge with the integral term, leads to overshoot by allowing the i
                     <h2>Prelab</h2>
 <p class="card-text">
     The lab focuses on developing PID control systems that enable robotic cars to autonomously fix their orientation. The orientation measurements required for this operation are obtained via an IMU sensor integrated into the robot.</p>
+<p class="card-text">
+    Debugging data was send over bluetooth from the Artemis board to the computer, where a Python handler function is used to store the data in various arrays. Time, error (Angle to the set oriantation), PID value (sent seperately) and pwm were all logged.</p>
+    <img src="images/lab6/send.png" controls width="750">
+    <img src="images/lab6/pycode.png" controls width="750">
+    <h2>P/I/D Discussion </h2>
+<p class="card-text"> 
+    PID stands for Proportional-Integral-Derivative control, with the formula for correction being correction = Kperror + Kiintegral of error + Kd*derivative of error.</p>
+    <p class="card-text">
+        The proportional gain, Kp, addresses the current error (the discrepancy between the desired and actual values) proportionately. Increasing Kp intensifies the control response, though it may lead to overshoot or instability.</p>
+    <p class="card-text">
+        The integral gain, Ki, compensates for accumulated errors over time. It enhances control action for prolonged errors, but overly high values can introduce overshoot or oscillation due to the delay in counteracting accumulated errors.</p>
+    <p class="card-text">
+        The derivative gain, Kd, anticipates future errors by considering the error's rate of change. It serves as a dampener to minimize overshoot and slow down the response speed, but it may exacerbate noise in the system.</p>
+     <h2>Range/Sampling Time Discussion</h2>
+    <p class="card-text">
+Initially, my PID loop included a delay to wait for the distance sensor data to be ready, using while (!distanceSensor1.checkForDataReady()) delay(1). This setup resulted in each cycle averaging 90-100 ms. To accelerate the loop times, I removed the code that waited for sensor readiness. Consequently, the revised PID loop now operates at 8-9 ms per cycle, with the majority of this time, approximately 7 ms, being attributed to reading from the Time-of-Flight (TOF) sensor.</p>
+
+    <h2>PID Implementation</h2>
+    <p class="card-text"> The way I implement PID for setting oriantation is shown as follows.</p>
+        <img src="images/lab6/code.png" controls width="750">
+    <p class="card-text"> After testing, I set Kp = 8 , Ki = 1, Kd = 0.05</p>
+    <h2>Result</h2>
+<p class="card-text">
+    In the test, the car's response was as follows, and I have plotted the data accordingly. I believe the car performed well.</p>
+    <video src="images/lab6/sPIDO.mp4" controls width="300" > </video>
+    <img src="images/lab6/plot.png" controls width="750">
     
+    
+<h2>Wind-up protection for integrator (5000+ level)</h2>
+    <p class="card-text">
+Windup presents a problem in the integral part of PID control, resulting in overshoot by permitting the integral term to build up beyond the saturation limits of the control signal. To mitigate this issue, I set limits on the integral term's accumulation.</p>
 
 
 
