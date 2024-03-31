@@ -675,10 +675,6 @@ Initially, my PID loop included a delay to wait for the distance sensor data to 
     <p class="card-text">
 Windup presents a problem in the integral part of PID control, resulting in overshoot by permitting the integral term to build up beyond the saturation limits of the control signal. To mitigate this issue, I set limits on the integral term's accumulation.</p>
 
-
-
-
-
     
 </div>
             <div class="modal-footer">
@@ -688,6 +684,101 @@ Windup presents a problem in the integral part of PID control, resulting in over
     </div>
 </div>
                 </div>
+
+
+<!-- Content Row-->
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Lab Seven</h2>
+                            <p class="card-text">The objective of Lab 7 is to implement a Kalman Filter, which can help to execute PID control faster. </p>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#labSevenModal">
+        More Info
+    </button>
+                    </div>
+                <div class="modal fade" id="labSevenModal" tabindex="-1" aria-labelledby="labSevenModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="labSeven
+                    ModalLabel">Lab Two Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+<div class="modal-body" style="overflow-y: auto; max-height: 80vh;">
+
+
+                    <h2>Estimate drag and momentum</h2>
+<p class="card-text">    
+In the lecture,professor provides an in-depth discussion on the Kalman filter. To tailor a Kalman filter for my robot, I must construct a state space model of the system. This involves calculating the drag and momentum terms for the A and B matrices, as outlined below.</p>
+    <img src="images/lab7/state.png" controls width="750">
+    <p class="card-text">   
+        where d is drag term and m is momentum term.</p>
+    <img src="images/lab7/md.png" controls width="750">
+    <p class="card-text">   
+    To determine the necessary parameters for the A and B matrices in your state space model, such as the drag and momentum coefficients, you'll utilize a step response procedure. This method involves directing the robot toward a wall while meticulously documenting the data, which includes PWM signals, distance sensor outputs, and time stamps throughout the operation. Your goal is to allow the robot to reach and maintain a steady state for a certain duration, achieving a top speed of 100. To conclude the experiment, you'll halt the robot's progress by allowing it to contact the wall.</p>
+    <p class="card-text">   
+    The distance measurement and velocity is plotted as below, which shows the distance between robot and wall during the whole step response measurement process.</p>
+<p class="card-text">
+        I can get the steady state velocity to be about 2000 mm/s (90% is about 1800 mm/s) and the 90% rise time to be 2 s.</p>
+    <h2>Estimate drag and momentum</h2>
+<p class="card-text">
+    Therefore, based on the step response data I obtain, I can compute drag and momentum terms based on the fomula before. And then I can calculate the parameters using function mentioned above.</p>
+    
+
+   <h2> Kalman Filter Initialization</h2>
+<p class="card-text">
+    After obtaining the necessary values and estimating the A and B matrices from the step response experiment, the next step involves discretizing these matrices according to the sampling rate. This discretization process is essential for adapting the continuous system dynamics to a form suitable for digital implementation, enabling the use of the discretized matrices within the Kalman filter framework.</p>
+   <img src="images/lab7/ppy.png" controls width="750">
+    <p class="card-text">
+        With the parameters established and the A and B matrices discretized, the setup for the Kalman filter is complete. At this stage, the computed parameters can be integrated into the template for the Kalman filter as provided by the professor. This integration involves substituting the specifically computed values into the predefined structure of the Kalman filter template. The resulting code snippet, which represents the final version of the Kalman filter tailored to the robot, is as follows.</p>
+    <img src="images/lab7/kfpy.png" controls width="750">
+
+<h2> Kalman Filter Implementation in python</h2>
+    <p class="card-text">
+    To evaluate the efficacy of my Kalman filter, I plan to apply it to the PID control data gathered from the robot. Prior to importing this control data into the Kalman filter, it's necessary to establish the initial state parameters of the filter:</p>
+    <p class="card-text">
+        The 'x' matrix, which encapsulates the initial conditions of the robot, such as its starting position (derived from the first distance measurement in the PID distance data) and its initial velocity (assumed to be 0, given that the robot starts from a standstill).</p>
+        <p class="card-text">
+            The 'sig' matrix, which delineates the initial uncertainty in the robot's position and velocity. For both parameters, this uncertainty is quantified as a standard deviation of 5, reflecting an initial estimate of the variance in both position and velocity.</p>
+    <img src="images/lab7/imp.png" controls width="750">
+    <p class="card-text">
+    The plot below demonstrates the result of Kalman filter state estimation on the data I obtained from robot. It shows a good fit with almost no error.</p>
+    <img src="images/lab7/pyplot.png" controls width="750">
+
+    <p class="card-text">
+I also perform experiments with varying levels of measurement noise variance while maintaining a constant process noise variance, as the latter is solely determined by the sampling rate. An example of this approach involves configuring the Kalman filter model to account for a high measurement noise variance. This adjustment signifies that I am attributing less significance to the distance data acquired from the Time-of-Flight (ToF) sensor, due to its high measurement error.</p>
+    <img src="images/lab7/high.png" controls width="750">
+<h2> Kalman Filter Implementation in python</h2>
+ <p class="card-text">
+    Similar to last task, the parameters for Kalman filter need to be defined first, while as I have confirmed that previous parameters are good enough, I am using completely same parameters on Artemis side. Below are the code snippets for parameters initilization and Kalman filter definition.</p>
+<img src="images/lab7/code.png" controls width="750">
+    <p class="card-text">
+    Video below shows the working Kalman filter integrated with PID control on the robot.</p>
+    <video src="images/lab7/car.mp4" controls width="300" > </video>
+    
+    
+    
+    
+    
+
+
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+
+
+
+
+                
+
+
 
                 
                 
