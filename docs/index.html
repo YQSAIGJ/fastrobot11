@@ -799,7 +799,25 @@ I also perform experiments with varying levels of measurement noise variance whi
 <div class="modal-body" style="overflow-y: auto; max-height: 80vh;">
 
 
-                    <h2>Setting Up Computer for Python Development with the Artemis Board</h2>
+                    <h2>Lab Tasks</h2>
+
+<p class="card-text">
+    Although this lab builds upon the position control outcomes from Lab 6, PID control is omitted to allow the robot to accelerate at maximum speed towards the wall, and then reverse at full throttle to achieve a flip. Without the fine-tuning afforded by PID, I had to halt the robot at a greater distance than 500 mm from the wall to accommodate for drift.</p>
+    <p class="card-text">
+       After testing a lot, I halt the robot at 1200mm, so it can flip around 500mm away from the wall instead crushing. (1200 is the final value a used in the successful demo.)</p>
+    <p class="card-text">
+Within the Artemis command handler, the robot is programmed to execute a flip once it reaches the designated distance, by immediately reversing at maximum speed.</p>
+     <img src="images/lab8/code.png" controls width="750">
+    <h2>Test Result 1 (not perfect)</h2>
+    <video src="images/lab8/2.mp4" controls width="300" > </video>
+<p class="card-text">
+    In Result 1, the robot is not stable enough when fliping, so I make the robot do a quick stop after fliping to perfectly solve the problem.(In result 2 and result 3)</p>
+    <h2>Test Result 2 and 3</h2>
+    <video src="images/lab8/3.mp4" controls width="300" > </video>
+    <video src="images/lab8/33.mp4" controls width="300" > </video>
+    
+    
+        
 
 
 </div>
