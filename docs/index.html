@@ -891,6 +891,73 @@ After gathering distance measurements from various points in the laboratory, the
 </div>
                 </div>
 
+
+
+
+<!-- Content Row-->
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Lab Ten</h2>
+                            <p class="card-text">This lab implements a grid localization using Bayes Filter in a simulated environment.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#labTenModal">
+        More Info
+    </button>
+                    </div>
+                <div class="modal fade" id="labTenModal" tabindex="-1" aria-labelledby="labTenModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="labTenModalLabel">Lab Ten Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+<div class="modal-body" style="overflow-y: auto; max-height: 80vh;">
+
+<h2>Lab Tasks</h2>
+    <h2>Implementation</h2>
+    <h2>Compute Control</h2>
+    <p class="card-text">
+        
+The compute_control function calculates values for u, which include delta_rot1, delta_trans, and delta_rot2, using both the current and previous positions of the robot. The function utilizes a series of equations to perform these calculations.</p>
+        <img src="images/lab10/code.png" controls width="750">
+    <img src="images/lab10/1.png" controls width="750">
+    <h2>Odometry Motion Model</h2>
+        <p class="card-text">
+            The odom_motion_model function estimates the probability that the robot moved from a previous position prev_pose to a current position cur_pose given a specific control input u. First, the compute_control function is used to determine the necessary control action to transition from prev_pose to cur_pose. Subsequently, noise is incorporated using a Gaussian distribution to estimate the likelihood that the robot successfully executed the transition with the calculated control action. The probability is calculated as the product of the Gaussian functions applied to all three control parameters.</p>
+    <img src="images/lab10/2.png" controls width="750">
+    <h2>Prediction Step</h2>
+            <p class="card-text">
+                The prediction_step function updates the probability bel_bar by calculating the actual control input u from the current and previous positions of the robot, labeled cur_odom and prev_odom. If the belief value for any previous data point falls below 0.0001, it is deemed negligible and is thus ignored. Conversely, if the belief value exceeds this threshold, the function continues to process all current data points, updating bel_bar accordingly.</p>
+    <img src="images/lab10/3.png" controls width="750">
+    <h2>Sensor Model</h2>
+                <p class="card-text">
+                    
+The sensor_model function processes a pre-defined array of actual observations for a specific grid pose. It calculates the likelihood of each sensor reading by comparing it to the robot's sensor data recorded after moving, using a Gaussian function. In this function, the true observation serves as the mean, and sensor_sigma acts as the standard deviation, representing the noise level of the sensor model. The function returns an array of calculated probabilities for all 18 measurements, essentially assessing the probability that the sensor readings align with the true observations for that particular grid pose.</p>
+    <img src="images/lab10/4.png" controls width="750">
+    <h2>Update Step</h2>
+                    <p class="card-text">
+                        In the update step, the potential current poses of the robot are examined using three nested "for" loops. An intermediate belief value (loc.bel_bar, which was updated during the prediction step) is computed for each potential pose. This value is then multiplied by the probability that the current sensor readings accurately reflect that specific pose. The belief value for each pose is updated accordingly. Similarly to the prediction step, normalization is carried out to ensure that the sum of all belief values remains consistent.</p>
+    <img src="images/lab10/5.png" controls width="750">
+
+    <h2>Demonstration</h2>
+    <p class="card-text">
+Here is a simulation of the Bayes filter for a robot following a preplanned trajectory. The odometry readings (sensor values) are shown in red, the ground truth of the robot's position is depicted in green, and the belief is represented in blue. Additionally, the values of loc.bel_bar are plotted at each point</p>.
+<video src="images/lab10/22.mp4" controls width="300" > </video>
+
+
+    
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+
+
                 
                 
     
