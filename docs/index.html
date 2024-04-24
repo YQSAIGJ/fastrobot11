@@ -853,10 +853,33 @@ Within the Artemis command handler, the robot is programmed to execute a flip on
             </div>
 <div class="modal-body" style="overflow-y: auto; max-height: 80vh;">
 
+<h2>Lab Tasks</h2>
+    <h2>Angular Speed Control</h2>
+    
+    <p class="card-text">
+To ensure accurate distance measurements, the robot is programmed to turn at a low speed. A PID (Proportional-Integral-Derivative) control mechanism, specifically using only the proportional component, has proven effective in maintaining a consistent turning speed. This control mechanism is integrated with readings from an IMU (Inertial Measurement Unit) and a TOF (Time of Flight) sensor during the turning process.</p>
+   <img src="images/lab9/code.png" controls width="750">
+    <p class="card-text">
+    Below is a successful control with kp = 0.5, targetAngle = 360 degree, basicPWM = 116, and targetAngularSpeed = 25 degree/sec, where all the parameters are tuned by experiments.</p>
+<p class="card-text">
+    The video demonstrates that the robot experiences minor drift during its turning motion, leading to an error of approximately 50 mm. Additionally, there's an error of about 30 mm because the TOF (Time of Flight) sensor is not positioned exactly at the pivot point of the turn. To adjust for this, the measured distances can be corrected by subtracting this error value.</p>
 
+    <h2>Read out Distances</h2>
+    <p class="card-text">
+        The polar plot of point (5.3) (5,-3) (-3,-2) (0,0) (0,3) are shown as follows.
+        <img src="images/lab9/53.png" controls width="750">
+        <img src="images/lab9/5-3.png" controls width="750">
+        <img src="images/lab9/-3-2.png" controls width="750">
+        <img src="images/lab9/00.png" controls width="750">
+        <img src="images/lab9/03.png" controls width="750">
 
-
-
+<h2>Merge and plot</h2>
+        <p class="card-text">
+After gathering distance measurements from various points in the laboratory, the subsequent step involves integrating these data into a map. I transformed the robot's readings from the initial frame of reference, which is centered on the TOF sensor's position, to the room's inertial reference frame. Considering that the TOF sensor is mounted 50 mm in front of the robot, I accounted for this offset when translating the polar distance measurements into Cartesian coordinates. Additionally, I converted the TOF sensor's measurements from millimeters to feet for consistency.</p>
+<h2>Line-Based Map</h2>
+    <p class="card-text">
+    A line-based map is estimated from the scatter plot to later be used in the simulator:</p>
+<img src="images/lab9/diagram.png" controls width="750">
     
 </div>
             <div class="modal-footer">
