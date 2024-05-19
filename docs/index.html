@@ -963,7 +963,7 @@ Here is a simulation of the Bayes filter for a robot following a preplanned traj
                     <div class="card h-100">
                         <div class="card-body">
                             <h2 class="card-title">Lab Eleven</h2>
-                            <p class="card-text">This lab generates a map of obstacles and walls in a static room by spinning the robot on axis while taking TOF sensor reading.</p>
+                            <p class="card-text">In this lab, the localization with Bayes filter simulated in Lab 10 is performed on the actual robot.</p>
                         </div>
                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#labElevenModal">
         More Info
@@ -980,7 +980,24 @@ Here is a simulation of the Bayes filter for a robot following a preplanned traj
 
 
     <h2>Lab Tasks</h2>
-    <h2>Implementation</h2>
+    <p class="card-text">
+    The notebook lab11_sim.ipynb is initially executed to assess the localization functions in a simulated environment. The resulting plot displays odometry, ground truth, and belief data.</p>
+<img src="images/lab11/plot.png" controls width="750">
+    <p class="card-text">
+    The plot indicates that the belief (represented in blue) closely matches the ground truth (shown in green), suggesting that the localization functions are performing effectively.</p>
+    <h2>Implementation on real robot</h2>
+    <p class="card-text">
+The perform_observation_loop function issues a BLE command to the robot, instructing it to rotate a specified number of degrees and gather 18 uniformly spaced (angularly) TOF readings. These angular data and TOF readings are utilized as sensor bearings and ranges, respectively, in the Localization module.</p>
+<p class="card-text">
+To allow time for the robot to collect this data, I implemented a 40-second delay using asyncio. Initially, I attempted to define an async function and use the await keyword, but encountered errors likely due to missing asyncio components in the environment. Therefore, I resorted to directly invoking the asyncio sleep coroutine.</p>
+    
+<img src="images/lab11/python.png" controls width="750">
+    <p class="card-text">
+    On the Artemis side, I adapted the code from Lab 9 to execute the OBSERVATION command with a few modifications: I removed the PID control and programmed the robot to halt at every 20-degree interval to collect data.</p>
+    <img src="images/lab11/robot.png" controls width="750">
+    <h2>Results & Discussion</h2>
+    
+    
 
 
 
