@@ -996,14 +996,32 @@ To allow time for the robot to collect this data, I implemented a 40-second dela
     On the Artemis side, I adapted the code from Lab 9 to execute the OBSERVATION command with a few modifications: I removed the PID control and programmed the robot to halt at every 20-degree interval to collect data.</p>
     <img src="images/lab11/robot.png" controls width="750">
     <h2>Results & Discussion</h2>
-    
-    
+<p class="card-text">
+    I positioned the robot at four predefined poses in the lab and executed the update step of the Bayes filter at each location. To showcase the outcomes, I've included a polar plot of the collected data, logs from the update step that detail the belief with associated probabilities, and a map plot displaying the belief (in blue) and the ground truth (in green) at each pose. All measurements in the logs and plots are expressed in micrometers.</p>
+    <h2>Pose (-3 ft, -2 ft, 0 deg)</h2>
+     <img src="images/lab9/-3-2.png" controls width="750">
+    <img src="images/lab11/1.png" controls width="750">
+    <img src="images/lab11/2.png" controls width="750">
+    <h2>Pose (0 ft, 3 ft, 0 deg)</h2>
+    <img src="images/lab9/03.png" controls width="750">
+    <img src="images/lab11/3.png" controls width="750">
+    <img src="images/lab11/4.png" controls width="750">
+    <h2>Pose (5 ft, -3 ft, 0 deg)</h2>
+    <img src="images/lab9/5-3.png" controls width="750">
+    <img src="images/lab11/5.png" controls width="750">
+    <img src="images/lab11/6.png" controls width="750">
+    <h2>Pose (5 ft, 3 ft, 0 deg)</h2>
+    <img src="images/lab9/53.png" controls width="750">
+    <img src="images/lab11/7.png" controls width="750">
 
+    <h2>Conclusion</h2>
+    <p class="card-text">
+        The results indicate that the localization for position was generally effective, with the belief and ground truth points perfectly aligning at three out of four points. The deviation at the last point was minor, with an error of just one grid. Additionally, there was an orientation belief error of approximately ±10 degrees. Notably, the probabilities associated with all beliefs were extremely close to 1.0.</p>
+    <p class="card-text">
+        A potential reason for the less accurate localization at the position (5 ft, 3 ft, 0 deg) could be the symmetrical nature of the surroundings at that location, as suggested by the polar plot. This symmetry might have led to confusion in estimation due to similar Time-of-Flight (TOF) readings from different locations. The orientation error could likely be attributed to drift in the robot's turning and noise during TOF data collection.</p>
+        <p class="card-text">
+Overall, the lab results can be deemed successful, as the estimations were largely accurate and closely matched the actual poses of the robot, accompanied by high confidence in the beliefs.</p>
 
-
-
-
-    
 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
